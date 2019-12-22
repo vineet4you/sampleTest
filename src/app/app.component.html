@@ -1,0 +1,94 @@
+<div class="container">
+  <h1 class="text-center">Billing System</h1>
+  <p>Store Id: {{form.value.store_id}}</p>
+  <div class="">
+    <form [formGroup]="form" (submit)="createBill()">
+      <div class="row">
+        <div class="col-md-6 number">
+          <div class="form-group">
+            <small class="text-muted">Invoice Number</small>
+            <input type="text" class="form-control" formControlName="invoice_number" placeholder="Invoice Number" />
+          </div>
+          <div class="form-group">
+            <small class="text-muted">Order Number</small>
+            <input type="text" class="form-control" formControlName="order_number" placeholder="Order Number" />
+          </div>
+          <div class="form-group">
+            <button class="btn btn-primary btn-sm" type="button" (click)="addItem()">+Add Item</button>
+          </div>
+
+          <div class="total">
+            <p>Discount Type:
+              <span class="float-right"><strong>{{form.value.discount_type}}</strong></span>
+            </p>
+            <p>Tax Type:
+              <span class="float-right"><strong>{{form.value.tax_type}}</strong></span>
+            </p>
+            <p>Total:
+              <span class="float-right"><strong>{{form.value.currency}} {{form.value.total_cost}}</strong></span>
+            </p>
+          </div>
+          <div class="my-3">
+            <button class="btn btn-success w-100" type="submit" [disabled]="form.invalid">Create Bill</button>
+          </div>
+        </div>
+        <div class="col-md-6 items">
+          <div formArrayName="items" *ngFor="let item of form.get('items').controls; let i = index;">
+            <div class="item" [formGroupName]="i">
+              <p><strong>Item {{i+1}}</strong>
+                <span class="float-right"><small (click)="removeItem(i)" class="pointer">Remove</small></span>
+              </p>
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <small class="text-muted">Name</small>
+                    <input class="form-control" placeholder="Name" type="text" formControlName="item_name">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <small class="text-muted">Sku</small>
+                    <input class="form-control" placeholder="Sku" type="text" formControlName="item_sku">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <small class="text-muted">Marketing Price</small>
+                    <input min="0" class="form-control" placeholder="Marking Price" formControlName="marking_price"
+                      type="number">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <small class="text-muted">Selling Price</small>
+                    <input min="0" (change)="createTotal()"  class="form-control" placeholder="Selling Price" formControlName="selling_price"
+                      type="number">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <small class="text-muted">Quantity</small>
+                    <input min="0" (change)="createTotal()"  class="form-control" placeholder="Quantity" formControlName="quantity" type="number">
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <small class="text-muted">Info</small>
+                    <input class="form-control" placeholder="Info" type="text" formControlName="info">
+                  </div>
+                </div>
+                <!-- <div class="col-md-6">
+                  <div class="form-group">
+                    <button type="button" class="btn btn-primary btn-sm">+Add Tax</button>
+                  </div>
+                </div> -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>

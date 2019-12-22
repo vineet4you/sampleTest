@@ -1,0 +1,26 @@
+.w-50 {
+    width: 50%;
+    margin: auto;
+}
+
+.item {
+    border: 1px dotted #eee;
+    margin-top: 10px;
+    background: rgb(247, 247, 247);
+    padding: 10px;
+}
+.pointer {
+    cursor: pointer;
+}
+.items {
+    max-height: 800px;
+    overflow: auto;
+}
+.number {
+    position: relative;
+}
+.total {
+    background: lightyellow;
+    padding: 10px;
+    margin-top: 20px;
+}

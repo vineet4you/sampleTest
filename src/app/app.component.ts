@@ -34,7 +34,6 @@ export class AppComponent implements OnInit {
   createItem() {
     return this.fb.group({
       item_name: ['', [Validators.required]],
-      item_sku: ['', [Validators.required]],
       marking_price: [null, [Validators.required]],
       quantity: [null, [Validators.required]],
       selling_price: [null, [Validators.required]],
@@ -57,7 +56,7 @@ export class AppComponent implements OnInit {
 
   createTotal() {
     let total = 0;
-    this.form.value.items.map(item => {
+     this.form.value.items.map(item => {
       total += item.quantity * item.selling_price;
     });
     this.form.patchValue({
@@ -71,6 +70,7 @@ export class AppComponent implements OnInit {
   removeItem(i) {
     const control = <FormArray>this.form.controls['items'];
     control.removeAt(i);
+    this.createTotal();
   }
   createBill() {
     this.apiService.create(this.form.value).subscribe(response => {

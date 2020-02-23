@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-   url = 'https://bills.developer.exilent.systems';
+   url = '';
   create(createBill): Observable<any> {
     return this.http.post(`${this.url}/api/v1/bills`, {createBill});
   }
